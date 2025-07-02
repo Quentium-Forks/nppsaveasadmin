@@ -21,7 +21,7 @@ jobs:
     - name: Install CMake
       uses: jwlawson/actions-setup-cmake@v2
       with:
-        cmake-version: '3.19.7'
+        cmake-version: '3.31.8'
     
     - name: Checkout GTest
       uses: actions/checkout@v4
@@ -37,11 +37,11 @@ jobs:
         md build
         cd build
         IF "${{ matrix.platform }}"=="Win32" (
-          SET CMAKE_GENERATOR="Visual Studio 16 2019"
+          SET CMAKE_GENERATOR="Visual Studio 17 2022"
           SET CMAKE_PLATFORM=""
         ) ELSE (
-          SET CMAKE_GENERATOR="Visual Studio 16 2019"
-          SET CMAKE_PLATFORM="-A Win64"
+          SET CMAKE_GENERATOR="Visual Studio 17 2022"
+          SET CMAKE_PLATFORM="-A x64"
         )
         echo "PLATFORM_FOLDER=%PLATFORM_FOLDER%"
         echo "CMAKE_GENERATOR=%CMAKE_GENERATOR%"
