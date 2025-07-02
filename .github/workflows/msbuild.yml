@@ -8,7 +8,7 @@ env:
 
 jobs:
   build:
-    runs-on: windows-2016
+    runs-on: windows-2019
     
     strategy:
       matrix:
@@ -24,7 +24,7 @@ jobs:
         cmake-version: '3.19.3'
     
     - name: Checkout GTest
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: 'google/googletest'
         ref: 'release-1.10.0'
