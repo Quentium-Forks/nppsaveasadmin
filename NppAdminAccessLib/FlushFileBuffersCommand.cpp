@@ -1,4 +1,5 @@
 #include "FlushFileBuffersCommand.hpp"
+#include "IWinApiFunctions.hpp"
 #include <cstring>
 
 // Factory function implementation
