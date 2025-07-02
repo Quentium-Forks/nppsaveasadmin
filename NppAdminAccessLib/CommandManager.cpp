@@ -4,6 +4,7 @@
 #include "CreateFileWCommand.hpp"
 #include "GetFileTypeCommand.hpp"
 #include "WriteFileCommand.hpp"
+#include "FlushFileBuffersCommand.hpp" // Add this include
 
 #include <unordered_map>
 
@@ -34,4 +35,5 @@ void register_default_commands(CommandManager& manager,
   manager.register_command(CreateFileWCmd, make_create_filew_command(winapi));
   manager.register_command(WriteFileCmd, make_write_file_command(winapi));
   manager.register_command(GetFileTypeCmd, make_file_type_command(winapi));
+  manager.register_command(FlushFileBuffersCmd, make_flush_file_buffers_command(winapi)); // Register the new command
 }

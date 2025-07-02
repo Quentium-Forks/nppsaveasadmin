@@ -133,3 +133,25 @@ void execute_exit(Pipe& pipe_sender) {
   char code = ExitCmd;
   pipe_sender.write(data_to_vector(code));
 }
+
+BOOL execute_flush_file_buffers(Pipe& pipe_sender,
+                               Pipe& pipe_receiver,
+                               HANDLE handle) {
+  // Define the data structures if not already defined:
+  struct FlushFileBuffersData {
+    HANDLE handle;
+  };
+  struct FlushFileBuffersResult {
+    BOOL success;
+    DWORD last_error;
+  };
+
+  FlushFileBuffersData data = {0};
+  data.handle = handle;
+  FlushFileBuffersResult result = {0};
+  if (!execute_function(pipe_sender, pipe_receiver, data, FlushFileBuffersCmd, result))
+    return FALSE;
+
+  SetLastError(result.last_error);
+  return result.success;
+}

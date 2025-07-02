@@ -26,3 +26,6 @@ BOOL execute_close_handle(Pipe& pipe_sender,
                           Pipe& pipe_receiver,
                           HANDLE handle);
 void execute_exit(Pipe& pipe_sender);
+BOOL execute_flush_file_buffers(Pipe& pipe_sender,
+                               Pipe& pipe_receiver,
+                               HANDLE handle);

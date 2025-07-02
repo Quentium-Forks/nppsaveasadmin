@@ -24,6 +24,7 @@ enum Commands : std::uint8_t {
   CloseHandleCmd,
   GetFileTypeCmd,
   ExitCmd,
+  FlushFileBuffersCmd,
 
   MaxCmd
 };
