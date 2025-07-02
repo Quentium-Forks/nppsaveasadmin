@@ -30,6 +30,8 @@ class IWinApiFunctions {
   virtual BOOL close_handle(HANDLE object) = 0;
 
   virtual DWORD get_file_type(HANDLE file) = 0;
+
+  virtual BOOL FlushFileBuffers(HANDLE hFile) = 0;
 };
 
 class DefaultWinApiFunctions : public IWinApiFunctions {
@@ -60,4 +62,8 @@ class DefaultWinApiFunctions : public IWinApiFunctions {
   }
 
   DWORD get_file_type(HANDLE file) override { return GetFileType(file); }
+
+  BOOL FlushFileBuffers(HANDLE hFile) override {
+    return ::FlushFileBuffers(hFile);
+  }
 };
