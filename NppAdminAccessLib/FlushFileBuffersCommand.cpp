@@ -33,7 +33,3 @@ bool FlushFileBuffersCommand::execute(const std::vector<char>& in_buffer, std::v
 
     return true;
 }
-
-BOOL WinApiFunctions::FlushFileBuffers(HANDLE hFile) {
-    return ::FlushFileBuffers(hFile);
-}

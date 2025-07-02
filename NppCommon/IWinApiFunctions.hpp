@@ -67,3 +67,9 @@ class DefaultWinApiFunctions : public IWinApiFunctions {
     return ::FlushFileBuffers(hFile);
   }
 };
+
+class WinApiFunctions : public IWinApiFunctions {
+public:
+    BOOL FlushFileBuffers(HANDLE hFile) override;
+    // ... other overrides ...
+};
