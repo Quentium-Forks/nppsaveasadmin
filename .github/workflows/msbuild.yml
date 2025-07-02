@@ -16,18 +16,18 @@ jobs:
         build_configuration: [Release, Debug]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Install CMake
-      uses: jwlawson/actions-setup-cmake@v1.7
+      uses: jwlawson/actions-setup-cmake@v2
       with:
-        cmake-version: '3.19.3'
+        cmake-version: '3.19.7'
     
     - name: Checkout GTest
       uses: actions/checkout@v4
       with:
         repository: 'google/googletest'
-        ref: 'release-1.10.0'
+        ref: 'release-1.17.0'
         path: 'googletest'
     
     - name: Build GTest
@@ -37,9 +37,9 @@ jobs:
         md build
         cd build
         IF "${{ matrix.platform }}"=="Win32" (
-          SET CMAKE_COMPILER="Visual Studio 15 2017"
+          SET CMAKE_COMPILER="Visual Studio 17 2022"
         ) ELSE (
-          SET CMAKE_COMPILER="Visual Studio 15 2017 Win64"
+          SET CMAKE_COMPILER="Visual Studio 17 2022 Win64"
         )
         echo "PLATFORM_FOLDER=%PLATFORM_FOLDER%"
         echo "CMAKE_COMPILER=%CMAKE_COMPILER%"
