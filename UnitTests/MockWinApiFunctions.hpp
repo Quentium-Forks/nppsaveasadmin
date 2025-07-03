@@ -25,4 +25,5 @@ class MockWinApiFunctions : public IWinApiFunctions {
                       HANDLE));
   MOCK_METHOD1(close_handle, BOOL(HANDLE));
   MOCK_METHOD1(get_file_type, DWORD(HANDLE));
+  MOCK_METHOD(BOOL, FlushFileBuffers, (HANDLE hFile), (override));
 };
