@@ -80,6 +80,12 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild /m /p:Configuration=${{ matrix.build_configuration }} /p:platform=${{ matrix.platform }} /p:GTestPath=%GITHUB_WORKSPACE%\googletest_release /p:AssemblySearchPaths=googletest_release\include ${{env.SOLUTION_FILE_PATH}}
 
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Build-${{ matrix.platform }}-${{ matrix.build_configuration }}
+        path: NppSaveAsAdmin\bin64\*
+
     - name: Unit test x64
       working-directory: ${{env.GITHUB_WORKSPACE}}
       if: matrix.platform == 'x64'
