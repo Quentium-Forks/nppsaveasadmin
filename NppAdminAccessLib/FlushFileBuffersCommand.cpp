@@ -35,6 +35,6 @@ class FlushFileBuffersCommand : public ICommand {
     }
 };
 
-std::shared_ptr<ICommand> make_flush_file_buffers_command(IWinApiFunctions& winapi) {
-    return std::make_shared<FlushFileBuffersCommand>(winapi);
+std::unique_ptr<ICommand> make_flush_file_buffers_command(IWinApiFunctions& winapi) {
+    return std::make_unique<FlushFileBuffersCommand>(winapi);
 }
