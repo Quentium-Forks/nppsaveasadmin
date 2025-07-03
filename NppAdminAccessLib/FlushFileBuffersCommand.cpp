@@ -1,22 +1,33 @@
 #include "FlushFileBuffersCommand.hpp"
-#include "Common.hpp"
 #include "IWinApiFunctions.hpp"
+#include <cstring>
 
-class FlushFileBuffersCommand : public ICommand {
-public:
-  using ICommand::ICommand;
-private:
-  bool execute(const std::vector<char>& data,
-               std::vector<char>& ret_data) override {
-    auto in = get_command_data_from_vector<FlushFileBuffersData>(data);
-    if (!in) return false;
-    auto out = prepare_vector_to_store_data<FlushFileBuffersResult>(ret_data);
-    out->success    = m_winapi.flush_file_buffers(in->handle);
-    out->last_error = GetLastError();
+bool FlushFileBuffersCommand::execute(const std::vector<char>& in_buffer, std::vector<char>& out_buffer) {
+    struct FlushFileBuffersData {
+        HANDLE handle;
+    };
+    struct FlushFileBuffersResult {
+        BOOL success;
+        DWORD last_error;
+    };
+
+    if (in_buffer.size() != sizeof(FlushFileBuffersData)) {
+        return false;
+    }
+
+    FlushFileBuffersData data;
+    std::memcpy(&data, in_buffer.data(), sizeof(data));
+
+    FlushFileBuffersResult result = {0};
+    result.success = m_winapi.FlushFileBuffers(data.handle);
+    result.last_error = GetLastError();
+
+    out_buffer.resize(sizeof(result));
+    std::memcpy(out_buffer.data(), &result, sizeof(result));
+
     return true;
-  }
-};
+}
 
-std::unique_ptr<ICommand> make_flush_file_buffers_command(IWinApiFunctions& winapi) {
-  return std::make_unique<FlushFileBuffersCommand>(winapi);
+std::shared_ptr<ICommand> make_flush_file_buffers_command(IWinApiFunctions& winapi) {
+    return std::make_shared<FlushFileBuffersCommand>(winapi);
 }
