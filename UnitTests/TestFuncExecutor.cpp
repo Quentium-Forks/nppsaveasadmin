@@ -21,6 +21,7 @@ const wchar_t* TestFileNameW1 = L"test_file2.txt";
 const std::string TestBuffer = "test_text";
 
 using ::testing::_;
+using ::testing::DoAll;
 using ::testing::Return;
 using ::testing::SetArgReferee;
 
