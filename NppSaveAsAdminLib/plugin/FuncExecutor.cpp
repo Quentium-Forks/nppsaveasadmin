@@ -137,7 +137,6 @@ void execute_exit(Pipe& pipe_sender) {
 BOOL execute_flush_file_buffers(Pipe& pipe_sender,
                                Pipe& pipe_receiver,
                                HANDLE handle) {
-  // Define the data structures if not already defined:
   struct FlushFileBuffersData {
     HANDLE handle;
   };

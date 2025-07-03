@@ -71,5 +71,4 @@ class DefaultWinApiFunctions : public IWinApiFunctions {
 class WinApiFunctions : public IWinApiFunctions {
 public:
     BOOL FlushFileBuffers(HANDLE hFile) override;
-    // ... other overrides ...
 };

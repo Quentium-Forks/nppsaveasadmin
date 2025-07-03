@@ -130,7 +130,6 @@ class SaveAsAdminImpl::Impl {
   BOOL flush_file_buffers_hook(HANDLE handle) {
     HandleMap::iterator it = m_file_handles.find(handle);
     if (it != m_file_handles.end()) {
-      // Forward the flush request to the elevated process
       return execute_flush_file_buffers(
           *it->second->pipe_sender,
           *it->second->pipe_receiver,
@@ -177,7 +176,7 @@ class DefaultAdminAccessRunner : public AdminAccessRunner {
  private:
   std::wstring m_exe_path;
 };
-}  // namespace
+}
 
 AdminAccessRunner::~AdminAccessRunner() = default;
 
